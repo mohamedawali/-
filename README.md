@@ -1,6 +1,6 @@
 # Imams of the Great Mosque of Mecca
 
-- -	It is sound app imams of the great mosque of mecca.
+- It is sound app imams of the great mosque of mecca.
 - Used Flutter with Bloc .
 # API
 - https://mp3quran.net/eng/api
