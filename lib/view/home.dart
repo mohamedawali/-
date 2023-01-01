@@ -29,18 +29,16 @@ class _HomeState extends State<Home> {
     bloc = BlocProvider.of<QuranCubit>(context);
 
     Connectivity().onConnectivityChanged.listen((result) {
-      _connectivityResult = result;
+   setState(() {
+     _connectivityResult = result;
+   });
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return
-      // WillPopScope(
-      //   onWillPop: () async {
-      //     Navigator.of(context).pop(true);
-      //     return true;
-      //   },
+
       Scaffold(
             appBar: AppBar(
               title: Text(

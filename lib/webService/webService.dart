@@ -38,10 +38,10 @@ class WebService {
           allSurahList.add('${_moshafServer}${_surahList[i]}.mp3');
         }
       }
-    } on Exception catch (e) {
-      print("allSurahList");
-    }
+      return allSurahList.toList();
+    } on Exception catch(e) {
+      return allSurahList.toList();    }
 
-    return allSurahList.toList();
+
   }
 }

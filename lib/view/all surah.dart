@@ -36,6 +36,7 @@ class _AllSurahState extends State<AllSurah> {
   @override
   void initState() {
     super.initState();
+
     _audioPlayer = AudioPlayer();
 
 
@@ -47,7 +48,9 @@ class _AllSurahState extends State<AllSurah> {
       });
 
     });
-    allQuran(_screenArgument!.surahList, _screenArgument!.name);
+
+     allQuran(_screenArgument!.surahList, _screenArgument!.name);
+    ;
 
   }
 
@@ -68,47 +71,53 @@ class _AllSurahState extends State<AllSurah> {
             children: [
               SizedBox(height: screenSize.height*0.62 ,
             child:
-                  ListView.separated(
-                      shrinkWrap: true,
-                      physics: const PageScrollPhysics(),
-                      separatorBuilder: (context, index) => const Divider(
-                            thickness: 1,
-                          ),
-                      itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.only(
-                              right: 10, top: 5, bottom: 5, left: 10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              StreamBuilder<PlayerState>(
-                                  stream: _audioPlayer!.playerStateStream,
-                                  builder: (context, snapshot) {
-                                    return InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            _suraName = surahName[index];
-                                          });
+                  Builder(
+                    builder: (context) {if(_screenArgument!.surahList.isNotEmpty){
+                      return ListView.separated(
+                          shrinkWrap: true,
+                          physics: const PageScrollPhysics(),
+                          separatorBuilder: (context, index) => const Divider(
+                                thickness: 1,
+                              ),
+                          itemBuilder: (context, index) => Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 10, top: 5, bottom: 5, left: 10),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  StreamBuilder<PlayerState>(
+                                      stream: _audioPlayer!.playerStateStream,
+                                      builder: (context, snapshot) {
+                                        return InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                _suraName = surahName[index];
+                                              });
 
-                                        play(index);
-                                        },
-                                        child: Text(
-                                          surahName[index],
-                                          style: TextStyle(fontSize: 20.sp),
-                                        ));
-                                  }),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              CircleAvatar(
-                                backgroundImage: AssetImage(
-                                  _screenArgument!.image!,
-                                ),
-                                radius: 30.r,
-                              ),
-                            ],
-                          )),
-                      itemCount: _screenArgument!.surahList.length)
+                                            play(index);
+                                            },
+                                            child: Text(
+                                              surahName[index],
+                                              style: TextStyle(fontSize: 20.sp),
+                                            ));
+                                      }),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  CircleAvatar(
+                                    backgroundImage: AssetImage(
+                                      _screenArgument!.image!,
+                                    ),
+                                    radius: 30.r,
+                                  ),
+                                ],
+                              )),
+                          itemCount: _screenArgument!.surahList.length);}
+                      return Center(child: Text('Server not found!',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24.sp),),);
+
+                    }
+                  )
 
                   // }
                   ),
